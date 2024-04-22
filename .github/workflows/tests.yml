@@ -5,7 +5,7 @@ on:
     branches-ignore: ["main"]
 
 env:
-  SERVICE_NAME: test-user-service
+  SERVICE_NAME: test-thing-payloads-service
   LOG_LEVEL: DEBUG
   ENVIRONMENT: TEST
   DB_USERNAME: postgres
