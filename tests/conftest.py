@@ -65,27 +65,6 @@ async def thing_payloads_fixture(db_cleanup, seed_args) -> (datetime, datetime):
             temperature_value = math.sin(data_point_value) * 12.5
             humidity_value = math.sin(data_point_value) * 60.5
 
-            # payload = Payload(
-            #     cadence=PayloadValueUnit(value=1800, unit="seconds"),
-            #     battery=PayloadValueUnit(value=50, unit="%"),
-            #     temperature=Temperature(
-            #         value=temperature_value, unit="C", connection="pin:4"
-            #     ),
-            #     humidity=Humidity(
-            #         value=humidity_value,
-            #         unit="unknown",
-            #         connection="pin:6",
-            #         precipitation=False,
-            #     ),
-            # )
-            #
-            # thing_payload = ThingPayloadModel(
-            #     id=uuid.uuid4(),
-            #     device_id=DEVICE_IDS[device_id_index],
-            #     payload_timestamp=timestamp,
-            #     payload=json.dumps(payload),
-            # )
-
             payload = json.dumps({
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {
