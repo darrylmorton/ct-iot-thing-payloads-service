@@ -1,6 +1,5 @@
 import datetime
 
-from logger import log
 from tests.helper.routes_helper import (
     TEST_URL,
     http_client,
