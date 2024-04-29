@@ -1,15 +1,12 @@
 import contextlib
-import logging
 
 from alembic import command
 from alembic.config import Config
 from fastapi import FastAPI
 
-from config import SERVICE_NAME, get_logger
+from config import SERVICE_NAME
 from routers import health, thing_payloads
-
-# log = logging.getLogger("thing_payloads_service")
-log = get_logger()
+from logger import log
 
 
 async def run_migrations():

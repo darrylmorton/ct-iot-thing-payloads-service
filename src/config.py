@@ -1,5 +1,4 @@
 import os
-import logging
 
 from dotenv import load_dotenv
 
@@ -24,10 +23,3 @@ DATABASE_URL_SUFFIX = (
     )
 )
 DATABASE_URL = f"{DATABASE_URL_PREFIX}://{DATABASE_URL_SUFFIX}"
-
-
-def get_logger() -> logging.Logger:
-    logger = logging.getLogger("uvicorn")
-    logger.setLevel(logging.getLevelName(LOG_LEVEL))
-
-    return logger

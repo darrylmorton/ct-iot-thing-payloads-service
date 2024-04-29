@@ -1,16 +1,11 @@
 import datetime
 import json
-import logging
 import math
 import uuid
 
-from sqlalchemy.exc import DatabaseError
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
-from config import get_logger
 from models import ThingPayloadModel
-from schemas import Payload, PayloadValueUnit, Humidity, Temperature
-from tests.crud import insert_thing_payloads, insert_thing_payload
+from tests.crud import insert_thing_payload
 from tests.database import async_session
 
 DEVICE_IDS = [
@@ -22,19 +17,17 @@ DEVICE_IDS = [
     "fff-666666",
 ]
 
-# log = logging.getLogger("thing_payloads_service")
-log = get_logger()
 
-
-async def thing_payloads(total: int = 48) -> None:
+async def thing_payloads(total: int = 48) -> (int, int):
     payloads = []
-    start_date = datetime.datetime.now() - datetime.timedelta(days=2)
+    end_timestamp = datetime.datetime.now()
+    start_timestamp = end_timestamp - datetime.timedelta(days=2)
 
     for device_id_index in range(len(DEVICE_IDS)):
         data_point_value = device_id_index
 
         for payload_index in range(total):
-            date_timestamp = start_date + datetime.timedelta(days=payload_index)
+            date_timestamp = start_timestamp + datetime.timedelta(days=payload_index)
             timestamp = int(date_timestamp.timestamp())
             temperature_value = math.sin(data_point_value) * 12.5
             humidity_value = math.sin(data_point_value) * 60.5
@@ -129,16 +122,11 @@ async def thing_payloads(total: int = 48) -> None:
 
             data_point_value += 0.5
 
-    # try:
     async with async_session() as session:
         async with session.begin():
             session.add_all(payloads)
             # await session.commit()
 
-            # await session.refresh(thing_payload)
             await session.close()
-    # except DatabaseError as error:
-    #     log.error(f"Error while inserting thing payload: {error}")
 
-    # await insert_thing_payloads(payloads)
-    # return items
+    return start_timestamp, end_timestamp

@@ -1,13 +1,8 @@
-import uuid
-import json
-from typing import Any
-
 from datetime import datetime
 
-from sqlalchemy import Column, DATETIME, INTEGER, String, Uuid
-from sqlalchemy.dialects.postgresql import JSON, UUID, JSONB
+from sqlalchemy import Column, DATETIME, INTEGER, String
+from sqlalchemy.dialects.postgresql import JSON, UUID
 
-from sqlalchemy.orm import MappedColumn, Mapped, DeclarativeBase
 from database import Base
 
 

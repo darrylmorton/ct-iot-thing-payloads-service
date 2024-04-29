@@ -9,11 +9,11 @@ from dotenv import load_dotenv
 from sqlalchemy import delete
 
 from models import ThingPayloadModel
-from schemas import Payload, PayloadValueUnit, Temperature, Humidity
 from tests.database import async_session
+from tests.helper.seeds_helper import create_timestamp
+from logger import log
 
 load_dotenv(dotenv_path=".env.test")
-
 
 DEVICE_IDS = [
     "aaa-111111",
@@ -23,10 +23,6 @@ DEVICE_IDS = [
     "eee-555555",
     "fff-666666",
 ]
-
-# @pytest.fixture(scope="session")
-# async def thing_payloads_fixture(db_session):
-#     await thing_payloads(db_session)
 
 
 @pytest.fixture(scope="session")
@@ -47,17 +43,31 @@ async def db_cleanup():
 
 
 @pytest.fixture
-async def thing_payloads_fixture(db_cleanup):
-    payloads = []
-    total: int = 48
+async def seed_args() -> (int, datetime, datetime):
+    payloads_total = 48
+    # start_timestamp = create_timestamp("2021-04-01T00:00:00Z")
+    end_timestamp = create_timestamp("2020-08-08T00:00:00Z")
+    start_timestamp = end_timestamp - datetime.timedelta(
+        days=payloads_total
+    )  # 2020-08-06T00:00:00Z
 
-    start_date = datetime.datetime.now() - datetime.timedelta(days=2)
+    log.info(f"** seed_args {start_timestamp}")
+    log.info(f"** seed_args {end_timestamp}")
+
+    return payloads_total, start_timestamp, end_timestamp
+
+
+@pytest.fixture
+async def thing_payloads_fixture(db_cleanup, seed_args) -> (datetime, datetime):
+    payloads = []
+
+    payloads_total, start_timestamp, end_timestamp = seed_args
 
     for device_id_index in range(len(DEVICE_IDS)):
         data_point_value = device_id_index
 
-        for payload_index in range(total):
-            date_timestamp = start_date + datetime.timedelta(days=payload_index)
+        for payload_index in range(payloads_total):
+            date_timestamp = start_timestamp + datetime.timedelta(days=payload_index)
             timestamp = int(date_timestamp.timestamp())
             temperature_value = math.sin(data_point_value) * 12.5
             humidity_value = math.sin(data_point_value) * 60.5
@@ -118,5 +128,6 @@ async def thing_payloads_fixture(db_cleanup):
             session.add_all(payloads)
             await session.commit()
 
-            # await session.refresh(payloads)
             await session.close()
+
+    return start_timestamp, end_timestamp
