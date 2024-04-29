@@ -1,17 +1,15 @@
 import contextlib
+import logging
 
 from alembic import command
 from alembic.config import Config
 from fastapi import FastAPI
-from fastapi.security import OAuth2PasswordBearer
 
-from logger import log
-from config import SERVICE_NAME
+from config import SERVICE_NAME, get_logger
 from routers import health, thing_payloads
 
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-oauth2_scheme.auto_error = False
+# log = logging.getLogger("thing_payloads_service")
+log = get_logger()
 
 
 async def run_migrations():

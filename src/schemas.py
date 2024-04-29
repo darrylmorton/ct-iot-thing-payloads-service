@@ -1,26 +1,20 @@
-from pydantic import BaseModel, Field
+from datetime import datetime
+from uuid import UUID
+
+from pydantic import BaseModel, Field, Json
 
 
 class PayloadValueUnit(BaseModel):
-    value: str
+    value: str | int | float
     unit: str
-
-    class ConfigDict:
-        from_attributes = True
 
 
 class Temperature(PayloadValueUnit):
     connection: str
 
-    class ConfigDict:
-        from_attributes = True
-
 
 class Humidity(Temperature):
     precipitation: bool
-
-    class ConfigDict:
-        from_attributes = True
 
 
 class Payload(BaseModel):
@@ -29,15 +23,14 @@ class Payload(BaseModel):
     temperature: Temperature
     humidity: Humidity
 
-    class ConfigDict:
-        from_attributes = True
-
 
 class ThingPayload(BaseModel):
-    id: str
-    device_id: str = Field(alias="deviceId")
-    thing_payload: Payload = Field(alias="thingPayload")
-    payload_timestamp: int = Field(alias="payloadTimestamp")
+    id: UUID
+    device_id: str
+    payload: Json
+    payload_timestamp: int
+    updated_at: datetime = Field(exclude=True)
+    created_at: datetime = Field(exclude=True)
 
     class ConfigDict:
         from_attributes = True
