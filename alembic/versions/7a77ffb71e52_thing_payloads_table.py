@@ -6,7 +6,7 @@ Create Date: 2024-04-22 18:20:10.458363
 
 """
 
-from datetime import datetime
+import datetime
 from typing import Sequence, Union
 
 from alembic import op
@@ -27,8 +27,16 @@ def upgrade() -> None:
         sa.Column("device_id", sa.String, nullable=False),
         sa.Column("payload_timestamp", sa.Integer, nullable=False),
         sa.Column("payload", sa.JSON, nullable=False),
-        sa.Column("created_at", sa.DateTime, default=datetime.now()),
-        sa.Column("updated_at", sa.DateTime, default=datetime.now()),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            default=datetime.datetime.now(datetime.UTC),
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            default=datetime.datetime.now(datetime.UTC),
+        ),
     )
 
 

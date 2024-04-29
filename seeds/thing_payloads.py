@@ -20,7 +20,7 @@ DEVICE_IDS = [
 
 async def thing_payloads(total: int = 48) -> (int, int):
     payloads = []
-    end_timestamp = datetime.datetime.now()
+    end_timestamp = datetime.datetime.now(datetime.UTC)
     start_timestamp = end_timestamp - datetime.timedelta(days=2)
 
     for device_id_index in range(len(DEVICE_IDS)):
@@ -125,7 +125,7 @@ async def thing_payloads(total: int = 48) -> (int, int):
     async with async_session() as session:
         async with session.begin():
             session.add_all(payloads)
-            # await session.commit()
+            await session.commit()
 
             await session.close()
 

@@ -18,20 +18,11 @@ async def get_thing_payloads(req: Request) -> list[ThingPayload] | JSONResponse:
     start_timestamp = req.query_params.get("start_timestamp")
     end_timestamp = req.query_params.get("end_timestamp")
 
-    log.info(f"**** get_thing_payloads start_timestamp {start_timestamp}")
-    log.info(f"**** get_thing_payloads end_timestamp {end_timestamp}")
-
     if not start_timestamp or not end_timestamp:
-        # log.info(f"")
         start_timestamp, end_timestamp = create_default_epoch_timestamps()
 
     try:
-        log.info("**** RESULT BEFORE...")
-
-        result = await find_thing_payloads_by_timestamps(start_timestamp, end_timestamp)
-        log.info(f"RESULT {result=}")
-
-        return result
+        return await find_thing_payloads_by_timestamps(start_timestamp, end_timestamp)
 
     except DatabaseError as error:
         log.error(f"get_thing_payloads database error {error}")
