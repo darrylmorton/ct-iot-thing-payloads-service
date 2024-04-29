@@ -7,8 +7,6 @@ from tests.helper.routes_helper import (
     assert_thing_payloads,
 )
 
-from logger import log
-
 
 class TestThingPayloadsRoute:
     async def test_thing_payloads(self, thing_payloads_fixture):

@@ -9,12 +9,12 @@ class TestUtil:
     def test_is_iso_timestamp_valid_false(self):
         actual_result = is_iso_timestamp_valid("")
 
-        assert actual_result == False
+        assert actual_result is False
 
     def test_is_iso_timestamp_valid_true(self):
         actual_result = is_iso_timestamp_valid(self.timestamp)
 
-        assert actual_result == True
+        assert actual_result is True
 
     def test_create_default_timestamps(self):
         today = datetime.datetime.today()
