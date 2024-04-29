@@ -32,39 +32,6 @@ async def thing_payloads(total: int = 48) -> (int, int):
             temperature_value = math.sin(data_point_value) * 12.5
             humidity_value = math.sin(data_point_value) * 60.5
 
-            # payload = Payload(
-            #     cadence=PayloadValueUnit(value=1800, unit="seconds"),
-            #     battery=PayloadValueUnit(value=50, unit="%"),
-            #     temperature=Temperature(
-            #         value=temperature_value, unit="C", connection="pin:4"
-            #     ),
-            #     humidity=Humidity(
-            #         value=humidity_value,
-            #         unit="unknown",
-            #         connection="pin:6",
-            #         precipitation=False,
-            #     ),
-            # ).model_dump()
-
-            # payload = Payload(
-            #     cadence={"value": 1800, "unit": "seconds"},
-            #     battery={
-            #         "value": 50,
-            #         "unit": "%",
-            #     },
-            #     temperature={
-            #         "value": temperature_value,
-            #         "unit": "C",
-            #         "connection": "pin:4",
-            #     },
-            #     humidity={
-            #         "value": humidity_value,
-            #         "unit": "%",
-            #         "connection": "pin:6",
-            #         "precipitation": False,
-            #     },
-            # )
-
             payload = {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {
@@ -90,31 +57,6 @@ async def thing_payloads(total: int = 48) -> (int, int):
                 payload_timestamp=timestamp,
                 payload=json.dumps(payload),
             )
-
-            # log.info(f"BEFORE INSERT {thing_payload}")
-
-            # payload=Payload(
-            #     cadence=PayloadValueUnit(
-            #         value=1800,
-            #         unit="seconds"
-            #     ),
-            #     # "battery": {
-            #     #     "value": 50,
-            #     #     "unit": "%",
-            #     # },
-            #     # "temperature": {
-            #     #     "value": temperature_value,
-            #     #     "unit": "C",
-            #     #     "connection": "pin:4",
-            #     # },
-            #     # "humidity": {
-            #     #     "value": humidity_value,
-            #     #     "unit": "%",
-            #     #     "connection": "pin:6",
-            #     #     "precipitation": False,
-            #     # },
-            # ),
-            # # )
 
             await insert_thing_payload(thing_payload)
 
