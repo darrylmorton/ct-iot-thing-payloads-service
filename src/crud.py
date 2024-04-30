@@ -2,11 +2,12 @@ from sqlalchemy import select
 
 from database import async_session
 from models import ThingPayloadModel
+from schemas import ThingPayload
 
 
 async def find_thing_payloads_by_timestamps(
     start_timestamp: int, end_timestamp: int
-) -> list[ThingPayloadModel]:
+) -> list[ThingPayload]:
     async with async_session() as session:
         async with session.begin():
             stmt = (
