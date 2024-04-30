@@ -17,7 +17,7 @@ class TestUtil:
         assert actual_result is True
 
     def test_create_default_timestamps(self):
-        today = datetime.datetime.today()
+        today = datetime.datetime.now(datetime.UTC)
         expected_today_timestamp = int(today.timestamp())
         expected_yesterday_timestamp = int(
             (today - datetime.timedelta(days=1)).timestamp()
