@@ -7,7 +7,9 @@ license = "GNU"
 readme = "README.md"
 repository = "https://github.com/darrylmorton/ct-iot-thing-payloads-service.git"
 keywords = ["ct", "iot", "thing", "payloads", "service"]
-packages = [{ include = "thing_payloads_service", from = "src" }]
+packages = [
+    { include = "thing_payloads_service", from = "src" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
