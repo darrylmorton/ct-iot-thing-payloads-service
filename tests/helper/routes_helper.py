@@ -19,9 +19,9 @@ async def http_client(base_url, path, params=None) -> Response:
 
 async def mock_http_client(app, base_url, path, params=None):
     async with AsyncClient(transport=ASGITransport(app=app), base_url=base_url) as ac:
-        # if params:
-        #     ac.params.set("start_timestamp", params["start_timestamp"])
-        #     ac.params.set("end_timestamp", params["end_timestamp"])
+        if params:
+            ac.params.set("start_timestamp", params["start_timestamp"])
+            ac.params.set("end_timestamp", params["end_timestamp"])
 
         return await ac.get(path)
 

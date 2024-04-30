@@ -52,7 +52,7 @@ async def seed_default_args() -> (int, datetime, datetime):
 async def thing_payloads_fixture(db_cleanup, seed_default_args) -> (datetime, datetime):
     payloads_total, start_timestamp, end_timestamp = seed_default_args
 
-    payloads = thing_payloads_seed(payloads_total, start_timestamp)
+    payloads = thing_payloads_seed(DEVICE_IDS, payloads_total, start_timestamp)
 
     async with async_session() as session:
         async with session.begin():

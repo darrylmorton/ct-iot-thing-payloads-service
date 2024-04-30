@@ -6,22 +6,12 @@ import uuid
 from models import ThingPayloadModel
 
 
-DEVICE_IDS = [
-    "aaa-111111",
-    "bbb-222222",
-    "ccc-333333",
-    "ddd-444444",
-    "eee-555555",
-    "fff-666666",
-]
-
-
 def thing_payloads_seed(
-    payloads_total: int, start_timestamp: datetime
+    device_ids: list[str], payloads_total: int, start_timestamp: datetime
 ) -> list[ThingPayloadModel]:
     payloads = []
 
-    for device_id_index in range(len(DEVICE_IDS)):
+    for device_id_index in range(len(device_ids)):
         data_point_value = device_id_index
 
         for payload_index in range(payloads_total):
@@ -51,7 +41,7 @@ def thing_payloads_seed(
 
             thing_payload = ThingPayloadModel(
                 id=uuid.uuid4(),
-                device_id=DEVICE_IDS[device_id_index],
+                device_id=device_ids[device_id_index],
                 payload_timestamp=timestamp,
                 payload=payload,
             )
