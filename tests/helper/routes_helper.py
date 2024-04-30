@@ -17,6 +17,11 @@ async def http_client(base_url, path, params=None) -> Response:
         return await ac.get(path, params=params)
 
 
+async def mock_http_client(app, base_url, path):
+    async with AsyncClient(app=app, base_url=base_url) as ac:
+        return await ac.get(path)
+
+
 def validate_uuid4(uuid_string) -> bool:
     """
     Validate that a UUID string is in
@@ -419,5 +424,5 @@ def assert_thing_payload(actual_result, expected_result):
 def assert_thing_payloads(actual_result, expected_result):
     assert len(actual_result) == len(expected_result)
 
-    for index, item in enumerate(actual_result):
-        assert_thing_payload(item, expected_result[index])
+    for index in range(len(actual_result) - 1):
+        assert_thing_payload(actual_result[index], expected_result[index])

@@ -1,5 +1,7 @@
 import datetime
 
+import pytest
+
 from tests.helper.routes_helper import (
     TEST_URL,
     http_client,
@@ -9,7 +11,15 @@ from tests.helper.routes_helper import (
 
 
 class TestThingPayloadsRoute:
-    async def test_thing_payloads(self, thing_payloads_fixture):
+    async def test_thing_payloads_default_timestamps(self, thing_payloads_fixture):
+        response = await http_client(TEST_URL, "/api/thing-payloads")
+
+        actual_result = response.json()
+
+        assert response.status_code == 200
+        assert actual_result == []
+
+    async def test_thing_payloads_with_timestamps(self, thing_payloads_fixture):
         start_date, _ = thing_payloads_fixture
         start_timestamp: datetime = start_date + datetime.timedelta(hours=12)
         end_timestamp: datetime = start_date + datetime.timedelta(hours=88)
@@ -27,3 +37,7 @@ class TestThingPayloadsRoute:
         assert response.status_code == 200
 
         assert_thing_payloads(actual_result, expected_result)
+
+    @pytest.mark.skip
+    async def test_thing_payloads_with_invalid_timestamps(self, thing_payloads_fixture):
+        pass
