@@ -1,6 +1,6 @@
 import uuid
 
-from httpx import AsyncClient, Response
+from httpx import AsyncClient, Response, ASGITransport
 
 from tests.config import APP_PORT
 
@@ -18,7 +18,7 @@ async def http_client(base_url, path, params=None) -> Response:
 
 
 async def mock_http_client(app, base_url, path, params=None):
-    async with AsyncClient(app=app, base_url=base_url) as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url=base_url) as ac:
         # if params:
         #     ac.params.set("start_timestamp", params["start_timestamp"])
         #     ac.params.set("end_timestamp", params["end_timestamp"])
@@ -56,18 +56,14 @@ def validate_uuid4(uuid_string) -> bool:
 def expected_filtered_thing_payloads():
     return [
         {
-            "id": "05406777-34be-4e68-8f1b-7f6fc03da050",
+            "id": "5fef2e58-adc5-488a-b55f-07be533d3621",
             "device_id": "aaa-111111",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": 5.992819232552538,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": 5.99, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": 29.005245085554282,
+                    "value": 29.01,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -76,18 +72,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592784000,
         },
         {
-            "id": "39cd4801-3394-4700-a6ec-13838577414d",
+            "id": "0cee258a-480f-4959-ac2e-f6e7d9606179",
             "device_id": "bbb-222222",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": 12.468687332550681,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": 12.47, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": 60.34844668954529,
+                    "value": 60.35,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -96,18 +88,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592784000,
         },
         {
-            "id": "c5eb4d98-bbc3-4e3d-b4a6-ae99e9ee2b61",
+            "id": "2d38f3e3-d2e6-4de5-9ab7-a00b6113b722",
             "device_id": "ccc-333333",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": 7.4809018012994555,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": 7.48, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": 36.20756471828936,
+                    "value": 36.21,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -116,18 +104,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592784000,
         },
         {
-            "id": "51323b92-70e0-4ccc-83ba-cd5d598374e3",
+            "id": "c4c0577c-203e-4517-856c-ac4702111dfd",
             "device_id": "ddd-444444",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": -4.384790346120248,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": -4.38, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": -21.222385275222,
+                    "value": -21.22,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -136,18 +120,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592784000,
         },
         {
-            "id": "03561efb-356e-43b1-8cd3-03427287512a",
+            "id": "66cad734-6a94-4df8-a789-265a08410d99",
             "device_id": "eee-555555",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": -12.219126470813713,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": -12.22, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": -59.14057211873837,
+                    "value": -59.14,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -156,18 +136,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592784000,
         },
         {
-            "id": "b9cffee6-c7d5-408e-90c3-89b3449d1aab",
+            "id": "260a6b96-38f9-422a-a210-cbf34c251528",
             "device_id": "fff-666666",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": -8.819254069629899,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": -8.82, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": -42.68518969700871,
+                    "value": -42.69,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -176,18 +152,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592784000,
         },
         {
-            "id": "c44d30bf-7248-430a-9b58-5b5a733b3dc7",
+            "id": "7941f66c-1f72-4455-8f80-a0ade07a5516",
             "device_id": "aaa-111111",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": 10.518387310098706,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": 10.52, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": 50.90899458087774,
+                    "value": 50.91,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -196,18 +168,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592870400,
         },
         {
-            "id": "263907c5-4960-423e-b681-a12175cce944",
+            "id": "e02e5b90-f657-4984-905b-a87cf08f15fa",
             "device_id": "bbb-222222",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": 11.366217835321022,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": 11.37, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": 55.01249432295374,
+                    "value": 55.01,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -216,18 +184,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592870400,
         },
         {
-            "id": "47d8da0e-d83f-4db7-b974-6c58e0b05cd7",
+            "id": "53bd0c83-0856-42b4-a0df-912bbe08726b",
             "device_id": "ccc-333333",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": 1.7640001007483401,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": 1.76, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": 8.537760487621966,
+                    "value": 8.54,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -236,18 +200,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592870400,
         },
         {
-            "id": "81d6211e-e68e-4f79-b5b1-89e75b379dc4",
+            "id": "db912c08-8e31-4a41-9523-913869696c49",
             "device_id": "ddd-444444",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": -9.460031191349104,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": -9.46, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": -45.78655096612966,
+                    "value": -45.79,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -256,18 +216,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592870400,
         },
         {
-            "id": "d1e7d0ad-636c-48e2-bc54-5a826eb965f3",
+            "id": "0191d077-7cc3-43c1-833c-bbfb0e6a6103",
             "device_id": "eee-555555",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": -11.986553433289231,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": -11.99, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": -58.014918617119875,
+                    "value": -58.01,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -276,18 +232,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592870400,
         },
         {
-            "id": "ce367eda-b462-474d-a137-7bf90b72cee6",
+            "id": "6d0bec16-eada-4607-9b0a-894ff5f96b85",
             "device_id": "fff-666666",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": -3.4926937274865733,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": -3.49, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": -16.904637641035016,
+                    "value": -16.9,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -296,18 +248,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592870400,
         },
         {
-            "id": "865d9e4c-3291-41f0-a8d2-26aa3d3cc26f",
+            "id": "82a7a515-ab90-495a-b46a-ba0af6202324",
             "device_id": "aaa-111111",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": 12.468687332550681,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": 12.47, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": 60.34844668954529,
+                    "value": 60.35,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -316,18 +264,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592956800,
         },
         {
-            "id": "c0b63267-0312-4f88-b0df-5c157ff69eac",
+            "id": "5dc45c61-ba50-4e19-978d-23cedb632420",
             "device_id": "bbb-222222",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": 7.4809018012994555,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": 7.48, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": 36.20756471828936,
+                    "value": 36.21,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -336,18 +280,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592956800,
         },
         {
-            "id": "2d90df7f-5105-4b60-be6a-4f9be9672581",
+            "id": "f6dc31de-4ae2-4fe2-9038-a9721c14f51c",
             "device_id": "ccc-333333",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": -4.384790346120248,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": -4.38, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": -21.222385275222,
+                    "value": -21.22,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -356,18 +296,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592956800,
         },
         {
-            "id": "805c0096-4de5-41ec-b648-3f472db1e473",
+            "id": "f7994933-4acc-4b3d-8c90-48e0cef2ce8b",
             "device_id": "ddd-444444",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": -12.219126470813713,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": -12.22, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": -59.14057211873837,
+                    "value": -59.14,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -376,18 +312,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592956800,
         },
         {
-            "id": "cbe805ba-b873-48c3-9c1b-e0b2821ec917",
+            "id": "78d7b5d2-4ae6-4409-88c2-364cf1545cc2",
             "device_id": "eee-555555",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": -8.819254069629899,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": -8.82, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": -42.68518969700871,
+                    "value": -42.69,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
@@ -396,18 +328,14 @@ def expected_filtered_thing_payloads():
             "payload_timestamp": 1592956800,
         },
         {
-            "id": "5f53b3a4-eaa7-4421-956a-5236e9758f3f",
+            "id": "fc6233f2-7da8-4ceb-a895-3812ad1aa016",
             "device_id": "fff-666666",
             "payload": {
                 "cadence": {"value": 1800, "unit": "seconds"},
                 "battery": {"value": 50, "unit": "%"},
-                "temperature": {
-                    "value": 2.688999851097694,
-                    "unit": "C",
-                    "connection": "pin:4",
-                },
+                "temperature": {"value": 2.69, "unit": "C", "connection": "pin:4"},
                 "humidity": {
-                    "value": 13.01475927931284,
+                    "value": 13.01,
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,

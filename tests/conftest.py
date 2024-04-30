@@ -72,12 +72,12 @@ async def thing_payloads_fixture(db_cleanup, seed_args) -> (datetime, datetime):
                     "unit": "%",
                 },
                 "temperature": {
-                    "value": temperature_value,
+                    "value": round(temperature_value, 2),
                     "unit": "C",
                     "connection": "pin:4",
                 },
                 "humidity": {
-                    "value": humidity_value,
+                    "value": round(humidity_value, 2),
                     "unit": "%",
                     "connection": "pin:6",
                     "precipitation": False,
