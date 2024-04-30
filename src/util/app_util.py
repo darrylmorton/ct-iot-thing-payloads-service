@@ -12,7 +12,7 @@ def is_iso_timestamp_valid(iso_timestamp: str) -> bool:
 
 
 def create_default_epoch_timestamps() -> Tuple[int, int]:
-    today = datetime.datetime.now(tz=datetime.timezone.utc)
+    today = datetime.datetime.now(datetime.UTC)
 
     today_timestamp = int(today.timestamp())
     yesterday_timestamp = int((today - datetime.timedelta(days=1)).timestamp())
