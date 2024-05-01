@@ -1,6 +1,7 @@
 # ct-iot-thing-payloads-service
 
 ## Description
+The `thing-payloads-service` API serves thing payloads data.
 
 [Diagrams](./docs/DIAGRAMS.md)
 
@@ -20,8 +21,7 @@ make server-start
 ```
 docker-compose up -d
 
-npm run test:migrate
-npm run test:seed
+make dev-server-start
 ```
 
 ### Run Tests
@@ -32,4 +32,3 @@ make test
 ## Deployment
 
 ## Scripts
-
