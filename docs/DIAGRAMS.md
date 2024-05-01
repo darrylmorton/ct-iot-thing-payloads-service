@@ -1,14 +1,22 @@
 ```mermaid
 ---
-title: SQLAlchemy ThingPayloadModel
+title: SQLAlchemy Models and Pydantic Schemas
 ---
 classDiagram
+    class ThingPayload {
+        +str: id
+        +str: device_id
+        +json: payload
+        +int: payload_timestamp
+    }
+
+
     class ThingPayloadModel {
         +uuid: id
         +varchar: device_id
         +integer: payload_timestamp
         +jsonb: payload
-        +timestamp with time zone: updated_at
-        +timestamp with time zone: created_at
+        +timestamp: updated_at
+        +timestamp: created_at
     }
 ```
