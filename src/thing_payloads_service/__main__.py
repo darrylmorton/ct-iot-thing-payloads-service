@@ -1,16 +1,13 @@
-import logging
 import os
 
 import uvicorn
 
-from config import SERVICE_NAME
-from tests.config import APP_PORT
-
-log = logging.getLogger("thing_payloads_service")
+import config
+from logger import log
 
 
-def main(port: int = APP_PORT):
-    log.info(f"Starting {SERVICE_NAME}...")
+def main(port: int = config.APP_PORT):
+    log.info(f"Starting {config.SERVICE_NAME}...")
 
     try:
         cores = os.cpu_count()

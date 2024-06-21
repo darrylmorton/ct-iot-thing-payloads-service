@@ -11,7 +11,7 @@ LOG_LEVEL = os.environ.get("LOG_LEVEL") or "DEBUG"
 SERVICE_NAME = os.environ.get("SERVICE_NAME") or "thing-payloads-service"
 APP_PORT = os.environ.get("APP_PORT") or 8001
 
-THING_PAYLOADS_DB_NAME = os.environ.get("THING_PAYLOADS_DB_NAME")
+DB_NAME = os.environ.get("DB_NAME")
 DATABASE_URL_PREFIX = "postgresql+asyncpg"
 DATABASE_URL_SUFFIX = (
     "{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}".format(
