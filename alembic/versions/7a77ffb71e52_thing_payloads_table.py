@@ -23,7 +23,6 @@ depends_on: Union[str, Sequence[str], None] = None
 def upgrade() -> None:
     op.create_table(
         "thing_payloads",
-        # sa.Column("id", sa.Uuid, primary_key=True, nullable=False),
         sa.Column("id", sa.Uuid(), primary_key=True),
         sa.Column("device_id", sa.String, nullable=False),
         sa.Column("payload_timestamp", sa.Integer, nullable=False),
