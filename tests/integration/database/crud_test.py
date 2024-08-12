@@ -1,6 +1,6 @@
 import datetime
 
-from crud import find_thing_payloads_by_timestamps
+from crud import Crud
 
 
 class TestThingPayloadsDatabase:
@@ -9,7 +9,7 @@ class TestThingPayloadsDatabase:
         start_timestamp: datetime = int(start_date.timestamp())
         end_timestamp: datetime = int(end_date.timestamp())
 
-        actual_result = await find_thing_payloads_by_timestamps(
+        actual_result = await Crud().find_thing_payloads_by_timestamps(
             start_timestamp, end_timestamp
         )
 
@@ -20,7 +20,7 @@ class TestThingPayloadsDatabase:
         start_timestamp = int((start_date + datetime.timedelta(hours=12)).timestamp())
         end_timestamp = int((start_date + datetime.timedelta(hours=88)).timestamp())
 
-        actual_result = await find_thing_payloads_by_timestamps(
+        actual_result = await Crud().find_thing_payloads_by_timestamps(
             start_timestamp, end_timestamp
         )
 
