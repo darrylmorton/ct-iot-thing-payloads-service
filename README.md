@@ -19,7 +19,7 @@ make server-start
 ## Test
 
 ```
-docker-compose up -d
+docker compose up -d
 
 make dev-server-start
 ```
