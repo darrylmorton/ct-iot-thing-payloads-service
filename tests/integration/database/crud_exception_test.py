@@ -4,11 +4,11 @@ from unittest.mock import patch
 import pytest
 from sqlalchemy.exc import SQLAlchemyError
 
-import crud
+from crud import Crud
 
 
-class TestCrud:
-    @patch("crud.db_util.thing_payloads_by_timestamps_stmt")
+class TestCrudUtil:
+    @patch("crud.DbUtil.thing_payloads_by_timestamps_stmt")
     async def test_find_thing_payloads_by_timestamps_exception(
         self,
         mock_stmt,
@@ -24,6 +24,6 @@ class TestCrud:
         end_timestamp_int = int(end_timestamp.timestamp())
 
         with pytest.raises(SQLAlchemyError):
-            await crud.find_thing_payloads_by_timestamps(
+            await Crud().find_thing_payloads_by_timestamps(
                 start_timestamp_int, end_timestamp_int
             )

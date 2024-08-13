@@ -4,8 +4,8 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from schemas import ThingPayload
-from crud import find_thing_payloads_by_timestamps
-from util import app_util
+from crud import Crud
+from util.app_util import AppUtil
 
 from logger import log
 
@@ -19,10 +19,12 @@ async def get_thing_payloads(req: Request) -> list[ThingPayload] | JSONResponse:
     end_timestamp = req.query_params.get("end_timestamp")
 
     if not start_timestamp or not end_timestamp:
-        start_timestamp, end_timestamp = app_util.create_default_epoch_timestamps()
+        start_timestamp, end_timestamp = AppUtil.create_default_epoch_timestamps()
 
     try:
-        return await find_thing_payloads_by_timestamps(start_timestamp, end_timestamp)
+        return await Crud().find_thing_payloads_by_timestamps(
+            start_timestamp, end_timestamp
+        )
 
     except SQLAlchemyError as error:
         log.error(f"get_thing_payloads {error}")

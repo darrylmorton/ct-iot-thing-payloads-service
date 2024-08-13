@@ -1,10 +1,10 @@
-from tests.helper.routes_helper import TEST_URL, http_client
+from tests.helper.routes_helper import RoutesHelper
 
 
 async def test_health():
     expected_result = {"message": "ok"}
 
-    response = await http_client(TEST_URL, "healthz")
+    response = await RoutesHelper.http_client(RoutesHelper.TEST_URL, "healthz")
     actual_result = response.json()
 
     assert response.status_code == 200

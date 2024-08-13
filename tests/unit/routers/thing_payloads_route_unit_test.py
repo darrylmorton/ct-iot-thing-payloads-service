@@ -3,25 +3,27 @@ from unittest.mock import patch
 
 from sqlalchemy.exc import SQLAlchemyError
 
-from tests.helper.routes_helper import mock_http_client
+from tests.helper.routes_helper import RoutesHelper
 from thing_payloads_service.service import server
 
 
 class TestThingPayloadsRoute:
-    @patch("routers.thing_payloads.find_thing_payloads_by_timestamps")
+    @patch("routers.thing_payloads.Crud.find_thing_payloads_by_timestamps")
     async def test_thing_payloads_default_timestamps(
         self, mock_find_thing_payloads_by_timestamps
     ):
         mock_find_thing_payloads_by_timestamps.return_value = []
 
-        response = await mock_http_client(server, "http://test", "/api/thing-payloads")
+        response = await RoutesHelper.mock_http_client(
+            server, "http://test", "/api/thing-payloads"
+        )
 
         actual_result = response.json()
 
         assert response.status_code == 200
         assert actual_result == []
 
-    @patch("routers.thing_payloads.find_thing_payloads_by_timestamps")
+    @patch("routers.thing_payloads.Crud.find_thing_payloads_by_timestamps")
     async def test_thing_payloads_with_timestamps(
         self, mock_find_thing_payloads_by_timestamps
     ):
@@ -36,7 +38,7 @@ class TestThingPayloadsRoute:
             "end_timestamp": int(end_timestamp.timestamp()),
         }
 
-        response = await mock_http_client(
+        response = await RoutesHelper.mock_http_client(
             server, "http://test", "/api/thing-payloads", params
         )
 
@@ -45,7 +47,7 @@ class TestThingPayloadsRoute:
         assert response.status_code == 200
         assert actual_result == []
 
-    @patch("routers.thing_payloads.find_thing_payloads_by_timestamps")
+    @patch("routers.thing_payloads.Crud.find_thing_payloads_by_timestamps")
     async def test_thing_payloads_with_timestamps_exception(
         self, mock_find_thing_payloads_by_timestamps
     ):
@@ -60,7 +62,7 @@ class TestThingPayloadsRoute:
             "end_timestamp": int(end_timestamp.timestamp()),
         }
 
-        response = await mock_http_client(
+        response = await RoutesHelper.mock_http_client(
             server, "http://test", "/api/thing-payloads", params
         )
 
