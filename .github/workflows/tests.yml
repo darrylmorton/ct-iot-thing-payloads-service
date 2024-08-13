@@ -110,4 +110,4 @@ jobs:
           time: '5s'
 
       - name: Run integration tests
-        run: make test-integration-with-server
+        run: make test-integration
