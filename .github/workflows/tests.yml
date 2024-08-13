@@ -109,5 +109,8 @@ jobs:
         with:
           time: '5s'
 
+      - name: Start development server with migrations
+        run: make dev-server-start
+
       - name: Run integration tests
         run: make test-integration
