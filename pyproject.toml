@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ct_iot_thing_payloads_service"
-version = "0.0.4"
+version = "0.0.1"
 description = "ct_iot_thing_payloads_service"
 authors = ["Darryl Morton"]
 license = "GNU"
