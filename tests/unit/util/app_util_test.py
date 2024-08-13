@@ -3,7 +3,7 @@ import datetime
 from util.app_util import AppUtil
 
 
-class TestUtil:
+class TestAppUtil:
     timestamp = "2023-08-25T00:00:00Z"
 
     def test_is_iso_timestamp_valid_false(self):
@@ -29,3 +29,8 @@ class TestUtil:
 
         assert actual_yesterday_timestamp >= expected_yesterday_timestamp
         assert actual_today_timestamp <= expected_today_timestamp
+
+    async def test_get_app_version(self):
+        actual_result = AppUtil.get_app_version()
+
+        assert actual_result == "0.0.3"

@@ -1,11 +1,14 @@
 import os
 
 from dotenv import load_dotenv
+from util.app_util import AppUtil
+
 
 load_dotenv()
 
-AWS_REGION = os.environ.get("AWS_REGION")
+APP_VERSION = AppUtil.get_app_version()
 
+AWS_REGION = os.environ.get("AWS_REGION")
 ENVIRONMENT = os.environ.get("ENVIRONMENT")
 LOG_LEVEL = os.environ.get("LOG_LEVEL")
 SERVICE_NAME = os.environ.get("SERVICE_NAME")
