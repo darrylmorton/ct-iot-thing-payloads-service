@@ -9,16 +9,7 @@ class RoutesHelper:
     TEST_URL = f"http://localhost:{APP_PORT}"
 
     @staticmethod
-    async def http_client(base_url, path, params=None) -> Response:
-        async with AsyncClient(base_url=base_url) as ac:
-            if params:
-                ac.params.set("start_timestamp", params["start_timestamp"])
-                ac.params.set("end_timestamp", params["end_timestamp"])
-
-            return await ac.get(path, params=params)
-
-    @staticmethod
-    async def mock_http_client(app, base_url, path, params=None):
+    async def http_client(app, base_url, path, params=None) -> Response:
         async with AsyncClient(
             transport=ASGITransport(app=app), base_url=base_url
         ) as ac:
@@ -26,7 +17,7 @@ class RoutesHelper:
                 ac.params.set("start_timestamp", params["start_timestamp"])
                 ac.params.set("end_timestamp", params["end_timestamp"])
 
-            return await ac.get(path)
+            return await ac.get(path, params=params)
 
     @staticmethod
     def validate_uuid4(uuid_string) -> bool:

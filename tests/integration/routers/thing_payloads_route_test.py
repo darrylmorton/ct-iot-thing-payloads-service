@@ -3,12 +3,13 @@ import datetime
 import pytest
 
 from tests.helper.routes_helper import RoutesHelper
+from thing_payloads_service.service import server
 
 
 class TestThingPayloadsRoute:
     async def test_thing_payloads_default_timestamps(self, thing_payloads_fixture):
         response = await RoutesHelper.http_client(
-            RoutesHelper.TEST_URL, "/api/thing-payloads"
+            server, RoutesHelper.TEST_URL, "/api/thing-payloads"
         )
 
         actual_result = response.json()
@@ -28,7 +29,7 @@ class TestThingPayloadsRoute:
         expected_result = RoutesHelper.expected_filtered_thing_payloads()
 
         response = await RoutesHelper.http_client(
-            RoutesHelper.TEST_URL, "/api/thing-payloads", params
+            server, RoutesHelper.TEST_URL, "/api/thing-payloads", params
         )
 
         actual_result = response.json()
